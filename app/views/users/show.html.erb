@@ -2,3 +2,7 @@
   <%= gravatar_for @user %>
   <%= @user.name %>
 </h1>
+
+<ul>
+  <li>Location:　<%= @user.location.present? ? @user.location : "(--no-data--)" %></li>
+</ul>
