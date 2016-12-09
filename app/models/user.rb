@@ -38,4 +38,9 @@ class User < ActiveRecord::Base
     Micropost.where(user_id: following_user_ids + [self.id])
   end
   
+  def retweet(micropost)
+    microposts.build(original_id: micropost.id,
+                     content: micropost.content,
+                     original_user: micropost.user.name)
+  end
 end

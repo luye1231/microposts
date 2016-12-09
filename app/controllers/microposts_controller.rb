@@ -11,6 +11,18 @@ class MicropostsController < ApplicationController
       render 'static_pages/home'
     end
   end
+  
+  def retweet
+    original = Micropost.find(params[:id])
+    @retweet = current_user.retweet(original)
+    if @retweet.save
+      flash[:success] = "リツイートが完了しました"
+      redirect_to current_user
+    else
+      flash[:danger] = "リツイートに失敗しました"
+      redirect_to :back
+    end
+  end
 
   def destroy
     @micropost = current_user.microposts.find_by(id: params[:id])
